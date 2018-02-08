@@ -5,17 +5,22 @@ import { database } from './firebase';
 import './App.css';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       data: null,
       newData: ''
     };
+
+    this.dataRef = null;
   }
 
   componentDidMount() {
+    this.dataRef = database.ref()
+    //on('child_added')
+    //once()
     database.ref().on('value', (snapshot) => {
+      console.log(snapshot);
       this.setState(() => {
         return {
           data: snapshot.val()
@@ -26,11 +31,19 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // database.ref()
+    // this.dataRef
     //   .child('AmazingNewData')
     //   .push(this.state.newData);
 
-    database.ref('/AmazingNewData')
+    /*  snapshot.key()
+        snapshot.hasChild()
+        snapshot.forEach()
+        snapshot.remove()
+
+    */
+
+
+    this.dataRef
       .push(this.state.newData);
   }
 
