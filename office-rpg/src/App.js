@@ -12,7 +12,13 @@ class App extends Component {
   }
 
   componentWillMount() {
-    database.ref('characters').orderByKey().on('value', (snapshot) => {
+    /*
+    .limitToFirst(5)
+    .limitToLast(5)
+    .orderByChild
+
+    */
+    database.ref('characters').orderByChild('dexterity').limitToLast(100).on('value', (snapshot) => {
       this.setState({
         characters: snapshot.val()
       });
@@ -29,7 +35,7 @@ class App extends Component {
           <h2>Office RPG</h2>
         </div>
         <section className="Characters">
-          { characters && <Characters characters={characters} /> }
+          {characters && <Characters characters={characters} />}
         </section>
       </div>
     );
