@@ -16,7 +16,6 @@ class App extends Component {
     .limitToFirst(5)
     .limitToLast(5)
     .orderByChild
-
     */
     database.ref('characters').orderByChild('dexterity').limitToLast(100).on('value', (snapshot) => {
       this.setState({
