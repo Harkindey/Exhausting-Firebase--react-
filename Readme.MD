@@ -1,0 +1,1 @@
+Exploring all the functionality of firebase. 
