@@ -17,11 +17,14 @@ class App extends Component {
     .limitToLast(5)
     .orderByChild
     */
-    database.ref('characters').orderByChild('dexterity').limitToLast(100).on('value', (snapshot) => {
-      this.setState({
-        characters: snapshot.val()
+    database.ref('characters')
+      .orderByChild('dexterity')
+      .limitToLast(100)
+      .on('value', (snapshot) => {
+        this.setState({
+          characters: snapshot.val()
+        });
       });
-    });
   }
 
 
