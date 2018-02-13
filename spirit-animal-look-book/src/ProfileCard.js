@@ -6,11 +6,33 @@ import './ProfileCard.css';
 class ProfileCard extends Component {
   constructor(props) {
     super(props);
+    this.storageRef = storage.ref('/user-images').child(props.uid);
+    this.userRef = database.ref('/users').child(props.uid);
+  }
+
+  handleSubmit = (event) => {
+    const file = event.target.files[0]
+    const uploadTask = this.storageRef.child(file.name).put(file, { contentType: file.type })
+
+    uploadTask.then((snapshot) => {
+      this.userRef.child('photoURL').set(snapshot.downloadURL)
+    })
   }
 
   render() {
+    const { displayName, photoURL } = this.props.user;
     return (
       <article className="ProfileCard">
+        <img
+          className="ProfileCard--photo"
+          src={this.props.user.photoURL}
+        />
+        <h3>{displayName}</h3>
+        <FileInput
+          accept=".png,.gif,.jpeg"
+          placeholder="Select an image"
+          onChange={this.handleSubmit}
+        />
       </article>
     );
   }
