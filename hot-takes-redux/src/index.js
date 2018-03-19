@@ -6,9 +6,10 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import initialState from './initial-state';
 import Application from './containers/ApplicationContainer';
+import { startListeningToAuthChanges } from './actions/auth';
 import './index.css';
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 const enhancers = [];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,6 +21,8 @@ const store = createStore(
     ...enhancers
   )
 );
+
+
 
 ReactDOM.render(
   <Provider store={store}>
