@@ -13,8 +13,8 @@ import './index.css';
 
 const middleware = [thunk];
 const enhancers = [];
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const composeEnhancers = compose;
+//window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || 
 const store = createStore(
   reducer,
   initialState,
